@@ -1,8 +1,8 @@
 # SQLAlchemyCsvWriter
 
 [![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)
-[![Stable Version](https://img.shields.io/pypi/v/sqlalchemy_csv_writer?label=stable)][PyPI Releases]
-[![Python Versions](https://img.shields.io/pypi/pyversions/sqlalchemy_csv_writer)][PyPI]
+![Stable Version](https://img.shields.io/pypi/v/sqlalchemy_csv_writer?label=stable)
+![Python Versions](https://img.shields.io/pypi/pyversions/sqlalchemy_csv_writer)
 ![Tests](https://github.com/github/docs/actions/workflows/test.yml/badge.svg?branch=main)
 
 SQLAlchemyCsvWriter is a thin wrapper around the python csw.writer function to make the process of exporting 
