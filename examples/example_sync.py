@@ -33,6 +33,5 @@ with db.Session() as session:
         prefix_model_names=True,
         dialect="unix",
     )
-    writer.writerrows(results)
-
+    writer.write_rows(results)
     print(stringio.getvalue())

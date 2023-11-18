@@ -31,7 +31,7 @@ async def db():
     return db
 
 
-async def test_write_scalar_with_prefixed_header_and_formatting(db):
+async def test_write_rows_with_stream_scalars_with_prefixed_header_and_formatting(db):
     async with db.Session() as session:
         stringio = StringIO()
         results = await session.stream_scalars(select(User))
@@ -43,7 +43,7 @@ async def test_write_scalar_with_prefixed_header_and_formatting(db):
             prefix_model_names=True,
             dialect="unix",
         )
-        await writer.writerows_async(results)
+        await writer.write_rows_stream(results)
 
         expected_result = """"User.id","User.name","User.value"
 "1","mary","12.3"
@@ -54,7 +54,7 @@ async def test_write_scalar_with_prefixed_header_and_formatting(db):
         assert stringio.getvalue() == expected_result
 
 
-async def test_write_results_with_header(db):
+async def test_write_rows_with_stream_with_header(db):
     async with db.Session() as session:
         stringio = StringIO()
         results = await session.stream(select(User))
@@ -63,7 +63,7 @@ async def test_write_results_with_header(db):
             stringio,
             dialect="unix",
         )
-        await writer.writerows_async(results)
+        await writer.write_rows_stream(results)
 
         expected_result = """"id","name","value"
 "1","mary","12.31"
@@ -74,7 +74,7 @@ async def test_write_results_with_header(db):
         assert stringio.getvalue() == expected_result
 
 
-async def test_write_results_without_header(db):
+async def test_write_rows_with_stream_without_header(db):
     async with db.Session() as session:
         stringio = StringIO()
         results = await session.stream(select(User))
@@ -84,7 +84,70 @@ async def test_write_results_without_header(db):
             write_header=False,
             dialect="unix",
         )
-        await writer.writerows_async(results)
+        await writer.write_rows_stream(results)
+
+        expected_result = """"1","mary","12.31"
+"2","joe","12.31"
+"3","susan","12.31"
+"""
+
+        assert stringio.getvalue() == expected_result
+
+
+async def test_write_rows_with_scalars_with_prefixed_header_and_formatting(db):
+    async with db.Session() as session:
+        stringio = StringIO()
+        results = await session.scalars(select(User))
+
+        field_formats = {"User.value": "%.1f"}
+        writer = SQLAlchemyCsvWriter(
+            stringio,
+            field_formats=field_formats,
+            prefix_model_names=True,
+            dialect="unix",
+        )
+        writer.write_rows(results)
+
+        expected_result = """"User.id","User.name","User.value"
+"1","mary","12.3"
+"2","joe","12.3"
+"3","susan","12.3"
+"""
+
+        assert stringio.getvalue() == expected_result
+
+
+async def test_write_rows_with_execute_with_header(db):
+    async with db.Session() as session:
+        stringio = StringIO()
+        results = await session.execute(select(User))
+
+        writer = SQLAlchemyCsvWriter(
+            stringio,
+            dialect="unix",
+        )
+        writer.write_rows(results)
+
+        expected_result = """"id","name","value"
+"1","mary","12.31"
+"2","joe","12.31"
+"3","susan","12.31"
+"""
+
+        assert stringio.getvalue() == expected_result
+
+
+async def test_write_rows_with_execute_without_header(db):
+    async with db.Session() as session:
+        stringio = StringIO()
+        results = await session.execute(select(User))
+
+        writer = SQLAlchemyCsvWriter(
+            stringio,
+            write_header=False,
+            dialect="unix",
+        )
+        writer.write_rows(results)
 
         expected_result = """"1","mary","12.31"
 "2","joe","12.31"

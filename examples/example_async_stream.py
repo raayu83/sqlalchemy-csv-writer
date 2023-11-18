@@ -25,7 +25,7 @@ async def run():
 
     async with db.Session() as session:
         stringio = StringIO()
-        results = await session.execute(select(User))
+        results = await session.stream(select(User))
 
         field_formats = {"value": "%.2f"}
         writer = SQLAlchemyCsvWriter(
@@ -34,7 +34,7 @@ async def run():
             field_formats=field_formats,
             dialect="unix",
         )
-        writer.write_rows(results)
+        await writer.write_rows_stream(results)
 
         print(stringio.getvalue())
 

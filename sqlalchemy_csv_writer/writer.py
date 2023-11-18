@@ -35,11 +35,11 @@ class SQLAlchemyCsvWriter:
         self.field_formats = field_formats if field_formats else {}
         self.header_row_written = False
 
-    async def writerows_async(self, results):
+    async def write_rows_stream(self, results):
         async for result in results:
             self._process_result(result)
 
-    def writerrows(self, results):
+    def write_rows(self, results):
         for result in results:
             self._process_result(result)
 

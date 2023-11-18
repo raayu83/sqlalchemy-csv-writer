@@ -20,10 +20,10 @@ def db():
     return db
 
 
-def test_write_scalar_with_prefixed_header_and_formatting(db):
+def test_write_rows_with_scalars_with_prefixed_header_and_formatting(db):
     with db.Session() as session:
         stringio = StringIO()
-        results = session.execute(select(User)).all()
+        results = session.scalars(select(User)).all()
 
         field_formats = {"User.value": "%.1f"}
         writer = SQLAlchemyCsvWriter(
@@ -32,7 +32,7 @@ def test_write_scalar_with_prefixed_header_and_formatting(db):
             prefix_model_names=True,
             dialect="unix",
         )
-        writer.writerrows(results)
+        writer.write_rows(results)
 
         expected_result = """"User.id","User.name","User.value"
 "1","mary","12.3"
@@ -43,7 +43,7 @@ def test_write_scalar_with_prefixed_header_and_formatting(db):
         assert stringio.getvalue() == expected_result
 
 
-def test_write_results_with_header(db):
+def test_write_rows_with_execute_with_header(db):
     with db.Session() as session:
         stringio = StringIO()
         results = session.execute(select(User)).all()
@@ -52,7 +52,7 @@ def test_write_results_with_header(db):
             stringio,
             dialect="unix",
         )
-        writer.writerrows(results)
+        writer.write_rows(results)
 
         expected_result = """"id","name","value"
 "1","mary","12.31"
@@ -63,7 +63,7 @@ def test_write_results_with_header(db):
         assert stringio.getvalue() == expected_result
 
 
-def test_write_results_without_header(db):
+def test_write_rows_with_execute_without_header(db):
     with db.Session() as session:
         stringio = StringIO()
         results = session.execute(select(User)).all()
@@ -73,7 +73,7 @@ def test_write_results_without_header(db):
             write_header=False,
             dialect="unix",
         )
-        writer.writerrows(results)
+        writer.write_rows(results)
 
         expected_result = """"1","mary","12.31"
 "2","joe","12.31"
@@ -83,7 +83,7 @@ def test_write_results_without_header(db):
         assert stringio.getvalue() == expected_result
 
 
-def test_write_results_with_duplicate_columns(db):
+def test_write_rows_with_execute_with_duplicate_columns(db):
     with db.Session() as session:
         stringio = StringIO()
         results = session.execute(select(User, User)).all()
@@ -93,7 +93,7 @@ def test_write_results_with_duplicate_columns(db):
             write_header=True,
             dialect="unix",
         )
-        writer.writerrows(results)
+        writer.write_rows(results)
 
         expected_result = """"id","name","value","id","name","value"
 "1","mary","12.31","1","mary","12.31"
