@@ -5,7 +5,7 @@ from alchemical.aio import Alchemical, Model
 from sqlalchemy import String, select
 from sqlalchemy.orm import Mapped, mapped_column
 
-from sqlalchemy_csv_writer.writer import SQLAlchemyCsvWriter
+from sqlalchemy_csv_writer import SQLAlchemyCsvWriter
 
 
 class User(Model):

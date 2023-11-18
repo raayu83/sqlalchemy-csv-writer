@@ -5,7 +5,7 @@ import pytest
 from alchemical.aio import Alchemical
 from sqlalchemy import select
 
-from sqlalchemy_csv_writer.writer import SQLAlchemyCsvWriter
+from sqlalchemy_csv_writer import SQLAlchemyCsvWriter
 from tests.model import User
 
 
