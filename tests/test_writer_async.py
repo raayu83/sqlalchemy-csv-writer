@@ -6,7 +6,7 @@ from sqlalchemy import select
 from alchemical.aio import Alchemical
 
 from sqlalchemy_csv_writer.writer import SQLAlchemyCsvWriter
-from model import User
+from tests.model import User
 
 
 @pytest.fixture(scope="module")

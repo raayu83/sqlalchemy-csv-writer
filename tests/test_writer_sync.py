@@ -4,7 +4,7 @@ import pytest
 from sqlalchemy import  select
 from alchemical import Alchemical
 
-from model import User
+from tests.model import User
 from sqlalchemy_csv_writer.writer import SQLAlchemyCsvWriter
 
 
