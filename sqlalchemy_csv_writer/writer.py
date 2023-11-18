@@ -1,3 +1,4 @@
+"""Provide SQLAlchemy Csv Writer."""
 import csv
 import typing
 from typing import Union
@@ -7,7 +8,7 @@ from sqlalchemy.orm import DeclarativeBase
 
 
 class SQLAlchemyCsvWriter:
-    """Write SQL Alchemy results to a csv file"""
+    """Write SQL Alchemy results to a csv file."""
 
     def __init__(
         self,
@@ -18,17 +19,17 @@ class SQLAlchemyCsvWriter:
         *args,
         **kwargs,
     ):
-        """
-        Args:
-            csvfile: File-like object to write the resulting csv data to
-            write_header: Whether to write the header
-            prefix_model_names:  Whether to prefix the model names in the header
-            field_formats: Dictionary containing the column name as keys and
-                           column format as a values (using % style format syntax)
-            *args: extra arguments to pass to csv.writer instance
-            **kwargs: extra keyword arguments to pass to csv.writer instance
-        """
+        """Initialization.
 
+        Args:
+        csvfile: File-like object to write the resulting csv data to
+        write_header: Whether to write the header
+        prefix_model_names:  Whether to prefix the model names in the header
+        field_formats: Dictionary containing the column name as keys and
+                       column format as a values (using % style format syntax)
+        *args: extra arguments to pass to csv.writer instance
+        **kwargs: extra keyword arguments to pass to csv.writer instance
+        """
         self.writer = csv.writer(csvfile, *args, **kwargs)
         self.write_header = write_header
         self.prefix_model_names = prefix_model_names
@@ -36,10 +37,20 @@ class SQLAlchemyCsvWriter:
         self.header_row_written = False
 
     async def write_rows_stream(self, results):
+        """Write query results retrieved with SQLAlchemy's .stream or .stream_scalars.
+
+        Args:
+            results: query results retrieved with SQLAlchemy's .stream or .stream_scalars
+        """
         async for result in results:
             self._process_result(result)
 
     def write_rows(self, results):
+        """Write query results retrieved with SQLAlchemy's .execute or .scalars.
+
+        Args:
+            results: query results retrieved with SQLAlchemy's .execute or .scalars
+        """
         for result in results:
             self._process_result(result)
 
