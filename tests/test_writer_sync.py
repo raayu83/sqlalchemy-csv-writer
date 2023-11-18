@@ -1,7 +1,7 @@
 from io import StringIO
 
 import pytest
-from sqlalchemy import  select
+from sqlalchemy import select
 from alchemical import Alchemical
 
 from tests.model import User
@@ -81,6 +81,7 @@ def test_write_results_without_header(db):
 """
 
         assert stringio.getvalue() == expected_result
+
 
 def test_write_results_with_duplicate_columns(db):
     with db.Session() as session:

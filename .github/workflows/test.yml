@@ -89,7 +89,10 @@ jobs:
         run: poetry install --with dev
 
       - name: Run pytest
-        env:
-          POETRY_TEST_INTEGRATION_GIT_USERNAME: ${GITHUB_ACTOR}
-          POETRY_TEST_INTEGRATION_GIT_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: poetry run pytest -v
+
+      - name: Run ruff
+        run: poetry run ruff .
+
+      - name: Run ruff format
+        run: poetry run ruff format . --check
