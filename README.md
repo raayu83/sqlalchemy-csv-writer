@@ -1,8 +1,8 @@
 # SQLAlchemyCsvWriter
 
-[![Stable Version](https://img.shields.io/pypi/v/sqlalchemy_csv_writer?label=stable)][PyPI Releases]
-[![Python Versions](https://img.shields.io/pypi/pyversions/sqlalchemy_csv_writer)][PyPI]
-[Tests](https://github.com/github/docs/actions/workflows/test.yml/badge.svg?branch=main)
+![Stable Version](https://img.shields.io/pypi/v/sqlalchemy_csv_writer?label=stable)
+![Python Versions](https://img.shields.io/pypi/pyversions/sqlalchemy_csv_writer)
+![Tests](https://github.com/github/docs/actions/workflows/test.yml/badge.svg?branch=main)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)
 
