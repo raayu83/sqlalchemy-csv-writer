@@ -3,15 +3,16 @@ name = "sqlalchemy-csv-writer"
 version = "0.1.0"
 description = "Write SQLAlchemy results to csv files"
 authors = ["Rayuu83 <rayuu83@spellweb.de>"]
-readme = "README.rst"
+readme = "README.md"
 repository = "https://github.com/raayu83/sqlalchemy-csv-writer"
 keywords = ["sqlalchemy", "csv"]
 classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Database :: Front-Ends"
 ]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 sqlalchemy = ">=2.0.0"
 
 [tool.poetry.group.dev.dependencies]
