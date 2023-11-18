@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "sqlalchemy-csv-writer"
+version = "0.1.0"
+description = "Write SQLAlcehmy results to csv files"
+authors = ["Rayuu83 <rayuu83@spellweb.de>"]
+readme = "README.rst"
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.13"
+sqlalchemy = ">=2.0.0"
+
+[tool.poetry.group.dev.dependencies]
+aiosqlite = "^0.19.0"
+alchemical = "^1.0.1"
+greenlet = "^3.0.1"
+ruff = "^0.1.6"
+ruff-lsp = "^0.0.45"
+pytest = "^7.4.3"
+pytest-asyncio = "^0.21.1"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
