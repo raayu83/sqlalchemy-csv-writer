@@ -11,6 +11,8 @@ SQLAlchemy query results to csv simpler.
 
 It supports both synchronous as well as asynchronous query results, as well as streaming.
 
+# Usage
+
 ```python
     from io import StringIO
     from sqlalchemy_csv_writer import SQLAlchemyCsvWriter
@@ -25,3 +27,9 @@ It supports both synchronous as well as asynchronous query results, as well as s
     )
     writer.writerrows(results) # pass result of SQLAlchemy query
 ```
+
+For full examples see examples directory.
+
+# Installation
+- with pip: `pip install sqlalchemy-csv-writer`
+- with poetry: `poetry add sqlalchemy-csv-writer`
