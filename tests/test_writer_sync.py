@@ -1,11 +1,11 @@
 from io import StringIO
 
 import pytest
-from sqlalchemy import select
 from alchemical import Alchemical
+from sqlalchemy import select
 
-from tests.model import User
 from sqlalchemy_csv_writer.writer import SQLAlchemyCsvWriter
+from tests.model import User
 
 
 @pytest.fixture(scope="module")

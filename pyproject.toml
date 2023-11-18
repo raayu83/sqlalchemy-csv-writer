@@ -1,12 +1,17 @@
 [tool.poetry]
 name = "sqlalchemy-csv-writer"
 version = "0.1.0"
-description = "Write SQLAlcehmy results to csv files"
+description = "Write SQLAlchemy results to csv files"
 authors = ["Rayuu83 <rayuu83@spellweb.de>"]
 readme = "README.rst"
+repository = "https://github.com/raayu83/sqlalchemy-csv-writer"
+keywords = ["sqlalchemy", "csv"]
+classifiers = [
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
 
 [tool.poetry.dependencies]
-python = ">=3.8,<3.13"
+python = "^3.8"
 sqlalchemy = ">=2.0.0"
 
 [tool.poetry.group.dev.dependencies]
@@ -20,6 +25,25 @@ pytest-asyncio = "^0.21.1"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 120
+target-version = "py39"
+
+[tool.ruff.lint]
+extend-select = [
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "I",   # isort
+    "N",   # pep8-naming
+    "PIE", # flake8-pie
+    "PGH", # pygrep
+    "RUF", # ruff checks
+    "SIM", # flake8-simplify
+    "TCH", # flake8-type-checking
+    "TID", # flake8-tidy-imports
+    "UP",  # pyupgrade
+]
 
 [build-system]
 requires = ["poetry-core"]

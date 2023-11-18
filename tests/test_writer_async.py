@@ -2,8 +2,8 @@ import asyncio
 from io import StringIO
 
 import pytest
-from sqlalchemy import select
 from alchemical.aio import Alchemical
+from sqlalchemy import select
 
 from sqlalchemy_csv_writer.writer import SQLAlchemyCsvWriter
 from tests.model import User
