@@ -3,6 +3,7 @@
 [![Stable Version](https://img.shields.io/pypi/v/sqlalchemy_csv_writer?label=stable)](https://pypi.org/project/sqlalchemy-csv-writer/#history)
 ![Python Versions](https://img.shields.io/pypi/pyversions/sqlalchemy_csv_writer)
 ![Tests](https://github.com/github/docs/actions/workflows/test.yml/badge.svg?branch=main)
+![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/raayu83/38feaa0ba81091aaf7ad960a892c87d3/raw/cce7b6e58448206b9186ae3e7863ac128b5e0c90/coverage-badge.json)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)
 

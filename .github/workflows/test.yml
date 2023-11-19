@@ -18,8 +18,8 @@ jobs:
     runs-on: ${{ matrix.image }}
     strategy:
       matrix:
-        os: [Ubuntu, macOS, Windows]
-        python-version: ["3.9", "3.10", "3.11", "3.12"]
+        os: [ Ubuntu, macOS, Windows ]
+        python-version: [ "3.9", "3.10", "3.11", "3.12" ]
         include:
           - os: Ubuntu
             image: ubuntu-22.04
@@ -98,6 +98,7 @@ jobs:
 
       - name: Make coverage badge
         uses: schneegans/dynamic-badges-action@v1.7.0
+        if: ${{ matrix.os == 'Ubuntu' }} && ${{ matrix.python-version == '3.12' }}
         with:
           auth: ${{ secrets.GIST_SECRET }}
           gistID: 38feaa0ba81091aaf7ad960a892c87d3
