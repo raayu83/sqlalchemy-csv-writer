@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sqlalchemy-csv-writer"
-version = "0.3.0"
+version = "0.3.1"
 description = "Write SQLAlchemy results to csv files"
 authors = ["Rayuu83 <rayuu83@spellweb.de>"]
 readme = "README.md"
