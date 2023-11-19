@@ -1,5 +1,8 @@
 # Release Notes 
 
+## 0.3.1
+- add mkdocs and release to GitHub pages
+
 ## 0.3.0
 - add support for passing string path or pathlib Path as csvfile parameter
 - add support to use as context manager

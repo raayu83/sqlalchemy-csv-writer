@@ -3,12 +3,18 @@ site_url: https://raayu83.github.io/sqlalchemy-csv-writer/
 repo_url: https://github.com/raayu83/sqlalchemy-csv-writer
 theme:
   name: material
+  features:
+    - navigation.tabs
   icon:
     repo: fontawesome/brands/github
 nav:
   - Introduction: index.md
-  - Examples: examples.md
+  - Examples:
+    - Synchronous: examples/example_sync.md
+    - Asynchronous: examples/example_async.md
+    - Aynchronous Stream: examples/example_async_stream.md
   - API Reference: api.md
+  - Release Notes: changelog.md
 markdown_extensions:
   - pymdownx.snippets
   - pymdownx.highlight:
