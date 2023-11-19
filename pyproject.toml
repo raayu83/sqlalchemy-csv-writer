@@ -25,14 +25,15 @@ ruff = "^0.1.6"
 ruff-lsp = "^0.0.45"
 pytest = "^7.4.3"
 pytest-asyncio = "^0.21.1"
+pytest-cov = "^4.1.0"
 
 [tool.poetry.group.docs.dependencies]
-mkdocstrings = {extras = ["python"], version = "^0.24.0"}
 mkdocs = "^1.5.3"
+mkdocs-coverage = "^1.0.0"
 mkdocs-material = "^9.4.9"
-pymdown-extensions = "^10.4"
-mkdocs-git-revision-date-localized-plugin = "^1.2.1"
+mkdocstrings = { extras = ["python"], version = "^0.24.0" }
 mike = "^2.0.0"
+pymdown-extensions = "^10.4"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
@@ -43,18 +44,18 @@ target-version = "py39"
 
 [tool.ruff.lint]
 extend-select = [
-    "B",   # flake8-bugbear
-    "C4",  # flake8-comprehensions
-    "D",   # docstyle
-    "I",   # isort
-    "N",   # pep8-naming
+    "B", # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "D", # docstyle
+    "I", # isort
+    "N", # pep8-naming
     "PIE", # flake8-pie
     "PGH", # pygrep
     "RUF", # ruff checks
     "SIM", # flake8-simplify
     "TCH", # flake8-type-checking
     "TID", # flake8-tidy-imports
-    "UP",  # pyupgrade
+    "UP", # pyupgrade
 ]
 
 [tool.ruff.extend-per-file-ignores]

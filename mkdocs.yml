@@ -15,6 +15,7 @@ nav:
     - Aynchronous Stream: examples/example_async_stream.md
   - API Reference: api.md
   - Release Notes: changelog.md
+  - Coverage report: coverage.md
 markdown_extensions:
   - pymdownx.snippets
   - pymdownx.highlight:
@@ -25,9 +26,8 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.superfences
 plugins:
-  - git-revision-date-localized:
-      enable_creation_date: true
   - search
+  - coverage
   - mkdocstrings:
       handlers:
         python:

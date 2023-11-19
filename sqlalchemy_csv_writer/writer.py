@@ -17,8 +17,8 @@ class SQLAlchemyCsvWriter:
         header: Union[list[str], bool] = True,
         prefix_model_names: bool = False,
         field_formats: Union[dict[str, str], None] = None,
-        *args,
-        **kwargs,
+        dialect="excel",
+        **fmtparams,
     ):
         """Create a SQLAlchemyCsvWriter instance.
 
@@ -29,8 +29,8 @@ class SQLAlchemyCsvWriter:
             header: True to automatically generate header, False to disable header or list of strings for custom header
             prefix_model_names:  Whether to prefix the model names in the header
             field_formats: Dictionary containing the column name as keys and column format as a values (using % style format syntax)
-            *args: extra arguments to pass to csv.writer instance
-            **kwargs: extra keyword arguments to pass to csv.writer instance
+            dialect: csv dialect to use
+            **fmtparams: extra formatting parameters to pass to csv.writer instance
         """
         if isinstance(csvfile, str):
             csvfile = Path(csvfile)
@@ -39,7 +39,7 @@ class SQLAlchemyCsvWriter:
             csvfile = open(csvfile, "w", encoding="utf-8")  # noqa: SIM115
 
         self.csvfile = csvfile
-        self.writer = csv.writer(csvfile, *args, **kwargs)
+        self.writer = csv.writer(csvfile, dialect=dialect, **fmtparams)
         self.header = header
         self.prefix_model_names = prefix_model_names
         self.field_formats = field_formats if field_formats else {}

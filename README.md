@@ -6,10 +6,16 @@
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)
 
-SQLAlchemyCsvWriter is a thin wrapper around the python csw.writer function to make the process of exporting 
-SQLAlchemy query results to csv simpler. 
+SQLAlchemyCsvWriter is a thin wrapper around the python csw.writer function to make the process of exporting SQLAlchemy query results to csv simpler. 
 
 It supports both synchronous as well as asynchronous query results, as well as streaming.
+
+# Features
+- Write SQLAlchemy query results to csv file with little boilerplate
+- Optionally write header by auto generation or passing column names
+- Supports same dialect and formatting parameters as [csv.writer](https://docs.python.org/3/library/csv.html#csv.writer)
+- Supports synchronous, asynchronous and asynchronous streaming results
+- Supports any models defined wit DeclarativeBase
 
 # Installation
 - with pip: `pip install sqlalchemy-csv-writer`
@@ -30,4 +36,12 @@ with SQLAlchemyCsvWriter(
     writer.write_rows(results)  # pass results of SQLAlchemy query
 ```
 
-For full example see examples directory.
+For full example see examples directory (uses the [alchemical](https://github.com/miguelgrinberg/alchemical) SQLAlchemy wrapper).
+
+# Development Nots
+- Linting and formatting using ruff
+- Testing using pytest
+- Dependency management and release using poetry
+- Documentation using mkdocs with mkdocs-material and other plugins, released to GitHub pages
+- CI/CD using GitHub Actions
+- Pull requests are welcome

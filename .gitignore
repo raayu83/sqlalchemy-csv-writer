@@ -1,5 +1,8 @@
-*+/.pytest_cache/
+/.pytest_cache/
+/tests/.pytest_cache/
 /.ruff_cache/
 /.idea
 **/*.csv
 /site/**/*.*
+/.coverage
+/htmlcov/

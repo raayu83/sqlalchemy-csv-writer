@@ -25,7 +25,7 @@ def test_write_with_string_path(db):
         test_file = "test/test.csv"
         Path(test_file).unlink(missing_ok=True)
 
-        results = session.scalars(select(User)).all()
+        results = session.execute(select(User.id, User.name, User.value)).all()
 
         with SQLAlchemyCsvWriter(
             test_file,
@@ -41,14 +41,16 @@ def test_write_with_string_path(db):
 
         with open(test_file) as f:
             assert "".join(f.readlines()) == expected_result
+
+        Path(test_file).unlink(missing_ok=True)
 
 
 def test_write_with_pathlib_path(db):
     with db.Session() as session:
-        test_file = Path("test/test.csv")
+        test_file = Path("test/test2.csv")
         test_file.unlink(missing_ok=True)
 
-        results = session.scalars(select(User)).all()
+        results = session.execute(select(User)).all()
 
         with SQLAlchemyCsvWriter(
             test_file,
@@ -64,3 +66,5 @@ def test_write_with_pathlib_path(db):
 
         with open(test_file) as f:
             assert "".join(f.readlines()) == expected_result
+
+        test_file.unlink(missing_ok=True)

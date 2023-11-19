@@ -1,5 +1,9 @@
 # Release Notes 
 
+## 0.4.0
+- measure coverage and add to docs
+- adjust additional init parameters to match official csv.writer documentation
+
 ## 0.3.1
 - add mkdocs and release to GitHub pages
 
