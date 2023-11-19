@@ -90,12 +90,22 @@ jobs:
         run: poetry run pytest -v
 
       - name: Run coverage
-        run: poetry run coverage run -m pytest && poetry run coverage report
+        run: |
+          poetry run coverage run -m pytest
+          poetry run coverage report
+          export total=$(poetry run coverage report --format=total")
 
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - name: Make coverage badge
+        uses: schneegans/dynamic-badges-action@v1.7.0
+        with:
+          auth: ${{ secrets.GIST_TOKEN }}
+          gistID: 38feaa0ba81091aaf7ad960a892c87d3
+          filename: coverage-badge.json
+          label: Coverage
+          message: ${{ env.total }}%
+          minColorRange: 50
+          maxColorRange: 90
+          valColorRange: ${{ env.total }}
 
       - name: Run ruff
         run: poetry run ruff .
