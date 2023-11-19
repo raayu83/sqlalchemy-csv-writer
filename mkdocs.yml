@@ -15,7 +15,7 @@ nav:
     - Aynchronous Stream: examples/example_async_stream.md
   - API Reference: api.md
   - Release Notes: changelog.md
-  - Coverage report: coverage.md
+  - Coverage Report: coverage.md
 markdown_extensions:
   - pymdownx.snippets
   - pymdownx.highlight:

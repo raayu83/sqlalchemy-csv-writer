@@ -16,7 +16,7 @@ It supports both synchronous as well as asynchronous query results, as well as s
 - Optionally write header by auto generation or passing column names
 - Supports same dialect and formatting parameters as [csv.writer](https://docs.python.org/3/library/csv.html#csv.writer)
 - Supports synchronous, asynchronous and asynchronous streaming results
-- Supports any models defined wit DeclarativeBase
+- Supports any models defined with DeclarativeBase
 
 # Installation
 - with pip: `pip install sqlalchemy-csv-writer`
