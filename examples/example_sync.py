@@ -1,4 +1,4 @@
-from io import StringIO
+from pathlib import Path
 
 from alchemical import Alchemical, Model
 from sqlalchemy import String, select
@@ -22,16 +22,14 @@ with db.begin() as session:
         session.add(User(name=name, value=12.3))
 
 with db.Session() as session:
-    stringio = StringIO()
     results = session.execute(select(User)).all()
 
     field_formats = {"value": "%.2f"}
-    writer = SQLAlchemyCsvWriter(
-        stringio,
-        write_header=True,
+    with SQLAlchemyCsvWriter(
+        Path("test/example_sync.csv"),
+        header=True,
         field_formats=field_formats,
         prefix_model_names=True,
         dialect="unix",
-    )
-    writer.write_rows(results)
-    print(stringio.getvalue())
+    ) as writer:
+        writer.write_rows(results)

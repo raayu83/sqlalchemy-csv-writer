@@ -70,7 +70,7 @@ def test_write_rows_with_execute_without_header(db):
 
         writer = SQLAlchemyCsvWriter(
             stringio,
-            write_header=False,
+            header=False,
             dialect="unix",
         )
         writer.write_rows(results)
@@ -90,7 +90,7 @@ def test_write_rows_with_execute_with_duplicate_columns(db):
 
         writer = SQLAlchemyCsvWriter(
             stringio,
-            write_header=True,
+            header=True,
             dialect="unix",
         )
         writer.write_rows(results)
@@ -102,3 +102,39 @@ def test_write_rows_with_execute_with_duplicate_columns(db):
 """
 
         assert stringio.getvalue() == expected_result
+
+
+def test_write_rows_with_custom_header(db):
+    with db.Session() as session:
+        stringio = StringIO()
+        results = session.execute(select(User)).all()
+
+        writer = SQLAlchemyCsvWriter(
+            stringio,
+            header=["col_1", "col_2", "col_3"],
+            dialect="unix",
+        )
+        writer.write_rows(results)
+
+        expected_result = """"col_1","col_2","col_3"
+"1","mary","12.31"
+"2","joe","12.31"
+"3","susan","12.31"
+"""
+
+        assert stringio.getvalue() == expected_result
+
+
+def test_write_rows_with_custom_header_error(db):
+    with db.Session() as session:
+        stringio = StringIO()
+        results = session.execute(select(User)).all()
+
+        writer = SQLAlchemyCsvWriter(
+            stringio,
+            header=["col_1", "col_2"],
+            dialect="unix",
+        )
+
+        with pytest.raises(ValueError):
+            writer.write_rows(results)

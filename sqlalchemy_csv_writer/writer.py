@@ -1,6 +1,7 @@
 """Provide SQLAlchemy Csv Writer."""
 import csv
 import typing
+from pathlib import Path
 from typing import Union
 
 from sqlalchemy import inspect
@@ -12,32 +13,55 @@ class SQLAlchemyCsvWriter:
 
     def __init__(
         self,
-        csvfile: typing.IO,
-        write_header: bool = True,
+        csvfile: Union[typing.IO, str, Path],
+        header: Union[list[str], bool] = True,
         prefix_model_names: bool = False,
         field_formats: Union[dict[str, str], None] = None,
         *args,
         **kwargs,
     ):
-        """Initialization.
+        """Create a SQLAlchemyCsvWriter instance.
+
+        The instance's methods can be used to write rows to the specified csv file.
 
         Args:
-        csvfile: File-like object to write the resulting csv data to
-        write_header: Whether to write the header
-        prefix_model_names:  Whether to prefix the model names in the header
-        field_formats: Dictionary containing the column name as keys and
-                       column format as a values (using % style format syntax)
-        *args: extra arguments to pass to csv.writer instance
-        **kwargs: extra keyword arguments to pass to csv.writer instance
+            csvfile: Path or File-like object to write the resulting csv data to
+            header: True to automatically generate header, False to disable header or list of strings for custom header
+            prefix_model_names:  Whether to prefix the model names in the header
+            field_formats: Dictionary containing the column name as keys and column format as a values (using % style format syntax)
+            *args: extra arguments to pass to csv.writer instance
+            **kwargs: extra keyword arguments to pass to csv.writer instance
         """
+        if isinstance(csvfile, str):
+            csvfile = Path(csvfile)
+        if isinstance(csvfile, Path):
+            csvfile.parent.mkdir(exist_ok=True, parents=True)
+            csvfile = open(csvfile, "w", encoding="utf-8")  # noqa: SIM115
+
+        self.csvfile = csvfile
         self.writer = csv.writer(csvfile, *args, **kwargs)
-        self.write_header = write_header
+        self.header = header
         self.prefix_model_names = prefix_model_names
         self.field_formats = field_formats if field_formats else {}
         self.header_row_written = False
 
+    def __del__(self):
+        """Close open resources."""
+        if hasattr(self.csvfile, "close"):
+            self.csvfile.close()
+
+    def __enter__(self):
+        """Enter context manager."""
+        return self
+
+    def __exit__(self, type, value, traceback):
+        """Exit context manager."""
+        self.__del__()
+
     async def write_rows_stream(self, results):
-        """Write query results retrieved with SQLAlchemy's .stream or .stream_scalars.
+        """Write query results to csv.
+
+        Write query results retrieved with SQLAlchemy's .stream or .stream_scalars.
 
         Args:
             results: query results retrieved with SQLAlchemy's .stream or .stream_scalars
@@ -46,7 +70,9 @@ class SQLAlchemyCsvWriter:
             self._process_result(result)
 
     def write_rows(self, results):
-        """Write query results retrieved with SQLAlchemy's .execute or .scalars.
+        """Write query results to csv.
+
+        Write query results retrieved with SQLAlchemy's .execute or .scalars. to csv
 
         Args:
             results: query results retrieved with SQLAlchemy's .execute or .scalars
@@ -58,8 +84,14 @@ class SQLAlchemyCsvWriter:
         result = self._extract_columns(result)
 
         # write header
-        if self.write_header and not self.header_row_written:
-            self.writer.writerow([r[0] for r in result])
+        if self.header and not self.header_row_written:
+            if self.header is True:
+                self.writer.writerow([r[0] for r in result])
+            else:
+                if len(self.header) == len(result):
+                    self.writer.writerow(self.header)
+                else:
+                    raise ValueError("Length of header and content does not match.")
             self.header_row_written = True
 
         # write data

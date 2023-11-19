@@ -81,7 +81,7 @@ async def test_write_rows_with_stream_without_header(db):
 
         writer = SQLAlchemyCsvWriter(
             stringio,
-            write_header=False,
+            header=False,
             dialect="unix",
         )
         await writer.write_rows_stream(results)
@@ -144,7 +144,7 @@ async def test_write_rows_with_execute_without_header(db):
 
         writer = SQLAlchemyCsvWriter(
             stringio,
-            write_header=False,
+            header=False,
             dialect="unix",
         )
         writer.write_rows(results)

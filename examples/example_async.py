@@ -30,7 +30,7 @@ async def run():
         field_formats = {"value": "%.2f"}
         writer = SQLAlchemyCsvWriter(
             stringio,
-            write_header=True,
+            header=True,
             field_formats=field_formats,
             dialect="unix",
         )

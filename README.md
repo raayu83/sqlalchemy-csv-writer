@@ -18,18 +18,16 @@ It supports both synchronous as well as asynchronous query results, as well as s
 # Usage
 
 ```python
-    from io import StringIO
 from sqlalchemy_csv_writer import SQLAlchemyCsvWriter
 
-stringio = StringIO()
-writer = SQLAlchemyCsvWriter(
-    stringio,
-    write_header=True,
+with SQLAlchemyCsvWriter(
+    "test.csv",
+    header=True,
     field_formats={"column_1": "%.2f"},
     prefix_model_names=True,
     dialect="unix",
-)
-writer.write_rows(results)  # pass result of SQLAlchemy query
+) as writer:
+    writer.write_rows(results)  # pass results of SQLAlchemy query
 ```
 
 For full example see examples directory.
