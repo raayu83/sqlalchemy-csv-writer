@@ -94,27 +94,12 @@ jobs:
           poetry run coverage run -m pytest
           poetry run coverage report
           poetry run coverage xml
-          export TOTAL=$(poetry run coverage report --format=total)
-          echo "total=$TOTAL" >> $GITHUB_ENV
 
       - name: Upload coverage
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage.xml
-
-      - name: Make coverage badge
-        uses: schneegans/dynamic-badges-action@v1.7.0
-        if: ${{ matrix.os == 'Ubuntu' }} && ${{ matrix.python-version == '3.12' }}
-        with:
-          auth: ${{ secrets.GIST_SECRET }}
-          gistID: 38feaa0ba81091aaf7ad960a892c87d3
-          filename: coverage-badge.json
-          label: Coverage
-          message: ${{ env.total }}%
-          minColorRange: 50
-          maxColorRange: 90
-          valColorRange: ${{ env.total }}
 
       - name: Run ruff
         run: poetry run ruff .
