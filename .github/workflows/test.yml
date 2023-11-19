@@ -93,7 +93,8 @@ jobs:
         run: |
           poetry run coverage run -m pytest
           poetry run coverage report
-          export total=$(poetry run coverage report --format=total)
+          export TOTAL=$(poetry run coverage report --format=total)
+          echo "total=$TOTAL" >> $GITHUB_ENV
 
       - name: Make coverage badge
         uses: schneegans/dynamic-badges-action@v1.7.0
