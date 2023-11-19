@@ -25,7 +25,7 @@ ruff-lsp = "^0.0.45"
 pytest = "^7.4.3"
 pytest-asyncio = "^0.21.1"
 
-[tool.poetry.group.doc.dependencies]
+[tool.poetry.group.docs.dependencies]
 mkdocstrings = {extras = ["python"], version = "^0.24.0"}
 mkdocs = "^1.5.3"
 mkdocs-material = "^9.4.9"
