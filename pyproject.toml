@@ -15,6 +15,7 @@ classifiers = [
 python = "^3.9"
 sqlalchemy = ">=2.0.0"
 
+
 [tool.poetry.group.dev.dependencies]
 aiosqlite = "^0.19.0"
 alchemical = "^1.0.1"
@@ -23,6 +24,12 @@ ruff = "^0.1.6"
 ruff-lsp = "^0.0.45"
 pytest = "^7.4.3"
 pytest-asyncio = "^0.21.1"
+
+[tool.poetry.group.doc.dependencies]
+mkdocstrings = {extras = ["python"], version = "^0.24.0"}
+mkdocs = "^1.5.3"
+mkdocs-material = "^9.4.9"
+pymdown-extensions = "^10.4"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

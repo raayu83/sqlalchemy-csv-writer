@@ -1,0 +1,25 @@
+site_name: sqlalchemy-csv-writer
+theme:
+  name: material
+markdown_extensions:
+  - pymdownx.snippets
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+plugins:
+- search
+- mkdocstrings:
+    handlers:
+      python:
+        options:
+          filters:
+          - "!^__del__"
+          - "!^__exit__"
+nav:
+  - Introduction: index.md
+  - Examples: examples.md
+  - API Reference: api.md

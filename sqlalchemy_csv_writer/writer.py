@@ -13,7 +13,7 @@ class SQLAlchemyCsvWriter:
 
     def __init__(
         self,
-        csvfile: Union[typing.IO, str, Path],
+        csvfile: Union[Path, str, typing.IO],
         header: Union[list[str], bool] = True,
         prefix_model_names: bool = False,
         field_formats: Union[dict[str, str], None] = None,
@@ -51,14 +51,14 @@ class SQLAlchemyCsvWriter:
             self.csvfile.close()
 
     def __enter__(self):
-        """Enter context manager."""
+        """SQLAlchemyCsvWriter may be used as a context manager."""
         return self
 
     def __exit__(self, type, value, traceback):
         """Exit context manager."""
         self.__del__()
 
-    async def write_rows_stream(self, results):
+    async def write_rows_stream(self, results: list):
         """Write query results to csv.
 
         Write query results retrieved with SQLAlchemy's .stream or .stream_scalars.
@@ -69,7 +69,7 @@ class SQLAlchemyCsvWriter:
         async for result in results:
             self._process_result(result)
 
-    def write_rows(self, results):
+    def write_rows(self, results: list):
         """Write query results to csv.
 
         Write query results retrieved with SQLAlchemy's .execute or .scalars. to csv
