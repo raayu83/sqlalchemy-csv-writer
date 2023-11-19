@@ -1,4 +1,5 @@
 site_name: sqlalchemy-csv-writer
+site_url: https://raayu83.github.io/sqlalchemy-csv-writer/
 repo_url: https://github.com/raayu83/sqlalchemy-csv-writer
 theme:
   name: material

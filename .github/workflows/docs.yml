@@ -2,11 +2,8 @@ name: Docs
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - '**'
+    tags:
+      - '*.*.*'
 
 concurrency:
   group: docs-${{ github.head_ref || github.ref }}
@@ -42,4 +39,5 @@ jobs:
           restore-keys: |
             mkdocs-material-
 
-      - run: poetry run mkdocs gh-deploy --force
+      - name: Mike
+        run: poetry run mike deploy --push -update-aliases ${GITHUB_REF##*/} latest
