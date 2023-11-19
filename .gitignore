@@ -5,4 +5,5 @@
 **/*.csv
 /site/**/*.*
 /.coverage
+/coverage.xml
 /htmlcov/

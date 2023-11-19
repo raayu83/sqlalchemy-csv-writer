@@ -93,8 +93,15 @@ jobs:
         run: |
           poetry run coverage run -m pytest
           poetry run coverage report
+          poetry run coverage xml
           export TOTAL=$(poetry run coverage report --format=total)
           echo "total=$TOTAL" >> $GITHUB_ENV
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.xml
 
       - name: Make coverage badge
         uses: schneegans/dynamic-badges-action@v1.7.0
