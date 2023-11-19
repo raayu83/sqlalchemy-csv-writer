@@ -93,7 +93,7 @@ jobs:
         run: |
           poetry run coverage run -m pytest
           poetry run coverage report
-          export total=$(poetry run coverage report --format=total")
+          export total=$(poetry run coverage report --format=total)
 
       - name: Make coverage badge
         uses: schneegans/dynamic-badges-action@v1.7.0
