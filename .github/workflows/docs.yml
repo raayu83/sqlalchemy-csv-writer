@@ -40,4 +40,4 @@ jobs:
             mkdocs-material-
 
       - name: Mike
-        run: poetry run mike deploy --push -update-aliases ${GITHUB_REF##*/} latest
+        run: poetry run mike deploy --push --update-aliases ${GITHUB_REF##*/} latest
