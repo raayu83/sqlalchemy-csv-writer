@@ -11,18 +11,18 @@ SQLAlchemyCsvWriter is a thin wrapper around the python csw.writer function to m
 
 It supports both synchronous as well as asynchronous query results, as well as streaming.
 
-# Features
+## Features
 - Write SQLAlchemy query results to csv file with little boilerplate
 - Optionally write header by auto generation or passing column names
 - Supports same dialect and formatting parameters as [csv.writer](https://docs.python.org/3/library/csv.html#csv.writer)
 - Supports synchronous, asynchronous and asynchronous streaming results
 - Supports any models defined with DeclarativeBase
 
-# Installation
+## Installation
 - with pip: `pip install sqlalchemy-csv-writer`
 - with poetry: `poetry add sqlalchemy-csv-writer`
 
-# Usage
+## Usage
 
 ```python
 from sqlalchemy_csv_writer import SQLAlchemyCsvWriter
@@ -39,7 +39,7 @@ with SQLAlchemyCsvWriter(
 
 For full example see examples directory (uses the [alchemical](https://github.com/miguelgrinberg/alchemical) SQLAlchemy wrapper).
 
-# Development Nots
+## Development Notes
 - Linting and formatting using ruff
 - Testing using pytest
 - Dependency management and release using poetry

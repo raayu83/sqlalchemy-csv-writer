@@ -5,6 +5,7 @@ theme:
   name: material
   features:
     - navigation.tabs
+    - toc.integrate
   icon:
     repo: fontawesome/brands/github
 nav:

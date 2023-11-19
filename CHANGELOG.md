@@ -1,5 +1,11 @@
 # Release Notes 
 
+## 0.4.2
+- tweak documentation
+
+## 0.4.1
+- tweak documentation
+
 ## 0.4.0
 - measure coverage and add to docs
 - adjust additional init parameters to match official csv.writer documentation
