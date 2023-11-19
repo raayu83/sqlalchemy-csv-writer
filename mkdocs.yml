@@ -1,6 +1,13 @@
 site_name: sqlalchemy-csv-writer
+repo_url: https://github.com/raayu83/sqlalchemy-csv-writer
 theme:
   name: material
+  icon:
+    repo: fontawesome/brands/github
+nav:
+  - Introduction: index.md
+  - Examples: examples.md
+  - API Reference: api.md
 markdown_extensions:
   - pymdownx.snippets
   - pymdownx.highlight:
@@ -11,15 +18,17 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.superfences
 plugins:
-- search
-- mkdocstrings:
-    handlers:
-      python:
-        options:
-          filters:
-          - "!^__del__"
-          - "!^__exit__"
-nav:
-  - Introduction: index.md
-  - Examples: examples.md
-  - API Reference: api.md
+  - git-revision-date-localized:
+      enable_creation_date: true
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            filters:
+            - "!^__del__"
+            - "!^__exit__"
+extra:
+  version:
+    provider: mike
+
